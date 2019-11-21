@@ -78,13 +78,58 @@
                     <view key="view" contentMode="scaleToFill" id="koF-EE-gs5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="OGa-Mg-IoJ">
+                                <rect key="frame" x="18" y="272.5" width="378" height="31"/>
+                                <connections>
+                                    <action selector="fontChangeSlider:" destination="b3f-11-jgt" eventType="valueChanged" id="Pmd-Xu-QqX"/>
+                                </connections>
+                            </slider>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="8bt-Pp-1fl">
+                                <rect key="frame" x="160" y="370.5" width="94" height="32"/>
+                                <connections>
+                                    <action selector="fontChangeStepper:" destination="b3f-11-jgt" eventType="valueChanged" id="zkW-Oi-ziz"/>
+                                </connections>
+                            </stepper>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change FontSize" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TKX-DP-nke">
+                                <rect key="frame" x="100" y="519" width="214" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGG-A1-1Kk">
+                                <rect key="frame" x="20" y="90" width="374" height="1.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="TKX-DP-nke" firstAttribute="leading" secondItem="DD4-be-VEZ" secondAttribute="leading" constant="100" id="CNz-br-exb"/>
+                            <constraint firstItem="DD4-be-VEZ" firstAttribute="trailing" secondItem="TKX-DP-nke" secondAttribute="trailing" constant="100" id="GpL-Ik-SR2"/>
+                            <constraint firstItem="oGG-A1-1Kk" firstAttribute="leading" secondItem="DD4-be-VEZ" secondAttribute="leading" constant="20" id="I4W-ZT-ppk"/>
+                            <constraint firstItem="oGG-A1-1Kk" firstAttribute="top" secondItem="DD4-be-VEZ" secondAttribute="top" constant="90" id="NgQ-zV-AS0"/>
+                            <constraint firstItem="OGa-Mg-IoJ" firstAttribute="top" secondItem="oGG-A1-1Kk" secondAttribute="bottom" constant="181" id="QKI-YA-qFg"/>
+                            <constraint firstItem="8bt-Pp-1fl" firstAttribute="top" secondItem="OGa-Mg-IoJ" secondAttribute="bottom" constant="68" id="ScL-Uh-03d"/>
+                            <constraint firstItem="DD4-be-VEZ" firstAttribute="trailing" secondItem="8bt-Pp-1fl" secondAttribute="trailing" constant="160" id="Y27-Qo-TgI"/>
+                            <constraint firstItem="DD4-be-VEZ" firstAttribute="trailing" secondItem="OGa-Mg-IoJ" secondAttribute="trailing" constant="20" id="aEo-GC-HNF"/>
+                            <constraint firstItem="OGa-Mg-IoJ" firstAttribute="leading" secondItem="DD4-be-VEZ" secondAttribute="leading" constant="20" id="lqu-16-RBo"/>
+                            <constraint firstItem="DD4-be-VEZ" firstAttribute="bottom" secondItem="TKX-DP-nke" secondAttribute="bottom" constant="268" id="mgP-YY-5p5"/>
+                            <constraint firstItem="8bt-Pp-1fl" firstAttribute="leading" secondItem="DD4-be-VEZ" secondAttribute="leading" constant="160" id="rDQ-xG-Zfl"/>
+                            <constraint firstItem="DD4-be-VEZ" firstAttribute="trailing" secondItem="oGG-A1-1Kk" secondAttribute="trailing" constant="20" id="wjG-go-MuC"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="DD4-be-VEZ"/>
                     </view>
+                    <connections>
+                        <outlet property="fontLabel" destination="TKX-DP-nke" id="3vv-P8-B1N"/>
+                        <outlet property="fontSlider" destination="OGa-Mg-IoJ" id="mXZ-HZ-tfV"/>
+                        <outlet property="fontStepper" destination="8bt-Pp-1fl" id="3Rt-3D-l9n"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Jp-R6-YgX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1981" y="118"/>
+            <point key="canvasLocation" x="1979.7101449275365" y="117.85714285714285"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sA0-VY-dZO">

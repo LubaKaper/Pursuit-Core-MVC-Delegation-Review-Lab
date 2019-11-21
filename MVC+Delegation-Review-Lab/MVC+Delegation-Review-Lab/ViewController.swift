@@ -22,6 +22,14 @@ class ViewController: UIViewController {
     func loadData() {
         movies = Movie.allMovies
     }
+    
+    @IBAction func changeFont(segue: UIStoryboardSegue) {
+        guard let fontChangerViewController = segue.source as? FontChangerViewController,
+            let newFont = fontChangerViewController.fontLabel else {
+            fatalError("failed to access FontChangerViewController")
+        }
+    }
+    
 
 }
 

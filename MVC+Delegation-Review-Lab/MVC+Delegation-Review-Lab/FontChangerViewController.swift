@@ -9,22 +9,55 @@
 import UIKit
 
 class FontChangerViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+    @IBOutlet weak var fontSlider: UISlider!
+    
+    @IBOutlet weak var fontStepper: UIStepper!
+    
+    
+    @IBOutlet weak var fontLabel: UILabel!
+    
+    var stepperFont: Double = 17.0 {
+        didSet {
+            fontLabel.text = "Preview Font Size: \(Int(fontStepper.value))"
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    var sliderFont: Double = 17.0 {
+        didSet {
+            fontLabel.text = "Preview Font Size: \(Int(fontSlider.value))"
+        }
     }
-    */
-
+    override func viewDidLoad() {
+        super.viewDidLoad()
+configureSlider()
+        configureStepper()
+       
+    }
+    
+    func configureSlider() {
+        fontSlider.minimumValue = 1.0
+        fontSlider.maximumValue = 40.0
+        fontSlider.value = 17.0
+    }
+    
+    func configureStepper() {
+        fontStepper.minimumValue = 1.0
+        fontStepper.maximumValue = 40.0
+        fontStepper.value = 17.0
+        fontStepper.stepValue = 1.0
+    }
+    
+    @IBAction func fontChangeSlider(_ sender: UISlider) {
+        fontStepper.value = Double(sender.value)
+        sliderFont = Double(sender.value)
+        
+        
+    }
+    
+    @IBAction func fontChangeStepper(_ sender: UIStepper) {
+        fontSlider.value = Float(sender.value)
+        stepperFont = sender.value
+    }
+    
 }
