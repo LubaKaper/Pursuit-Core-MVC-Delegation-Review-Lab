@@ -17,47 +17,62 @@ class FontChangerViewController: UIViewController {
     
     @IBOutlet weak var fontLabel: UILabel!
     
-    var stepperFont: Double = 17.0 {
+    //    var stepperFont: Double = 17.0 {
+    //        didSet {
+    //            fontLabel.text = "Preview Font Size: \(Int(fontStepper.value))"
+    //        }
+    // }
+    
+    var sliderFont: CGFloat? {
         didSet {
-            fontLabel.text = "Preview Font Size: \(Int(fontStepper.value))"
+       updateUI()
         }
     }
     
-    var sliderFont: Double = 17.0 {
-        didSet {
-            fontLabel.text = "Preview Font Size: \(Int(fontSlider.value))"
-        }
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
-configureSlider()
+        configureSlider()
         configureStepper()
-       
+        updateUI()
+    }
+    
+    func updateUI() {
+        guard let validFontSize = sliderFont else {
+            fatalError("...")
+        }
+        fontSlider?.value = Float(validFontSize)
+        fontStepper?.value = Double(validFontSize)
+        fontLabel?.text = "Preview Font Size: \(Int(fontSlider.value))"
+        fontSlider?.value = Float(validFontSize)
+        fontStepper?.value = Double(validFontSize)
     }
     
     func configureSlider() {
         fontSlider.minimumValue = 1.0
         fontSlider.maximumValue = 40.0
-        fontSlider.value = 17.0
+        
     }
     
     func configureStepper() {
         fontStepper.minimumValue = 1.0
         fontStepper.maximumValue = 40.0
-        fontStepper.value = 17.0
         fontStepper.stepValue = 1.0
     }
     
     @IBAction func fontChangeSlider(_ sender: UISlider) {
         fontStepper.value = Double(sender.value)
-        sliderFont = Double(sender.value)
+        sliderFont = CGFloat(sender.value)
         
         
     }
     
     @IBAction func fontChangeStepper(_ sender: UIStepper) {
         fontSlider.value = Float(sender.value)
-        stepperFont = sender.value
+        sliderFont = CGFloat(sender.value)
+    }
+    
+    
+    @IBAction func returnButton(_ sender: UIButton) {
     }
     
 }

@@ -12,22 +12,45 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var movies = [Movie]()
+    var movies = [Movie]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    var fontSize: CGFloat! {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadData()
         tableView.dataSource = self
-    }
-    func loadData() {
-        movies = Movie.allMovies
+        loadData()
+        
     }
     
+    func loadData() {
+        movies = Movie.allMovies
+        fontSize = 17.0
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let fontChangerVC = segue.destination as? FontChangerViewController else {
+            fatalError()
+        }
+        //let font = fontSize
+        fontChangerVC.sliderFont = fontSize
+    }
+    
+    
     @IBAction func changeFont(segue: UIStoryboardSegue) {
-        guard let fontChangerViewController = segue.source as? FontChangerViewController,
-            let newFont = fontChangerViewController.fontLabel else {
+        guard let fontChangerViewController = segue.source as? FontChangerViewController else {
             fatalError("failed to access FontChangerViewController")
         }
+        fontSize = fontChangerViewController.sliderFont
+        
     }
     
 
@@ -45,6 +68,8 @@ extension ViewController: UITableViewDataSource {
         
         cell.textLabel?.text = movie.name
         cell.detailTextLabel?.text = movie.year.description
+        cell.textLabel?.font = UIFont(name: "Didot", size: CGFloat(fontSize!))
+        cell.detailTextLabel?.font = UIFont(name: "Didot", size: CGFloat(fontSize!))
         return cell 
     }
 }
