@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class FontChangerViewController: UIViewController {
     
     @IBOutlet weak var fontSlider: UISlider!
@@ -16,6 +17,9 @@ class FontChangerViewController: UIViewController {
     
     
     @IBOutlet weak var fontLabel: UILabel!
+    
+   // STEP 2
+     weak var delegate: FontDelegate?
     
     //    var stepperFont: Double = 17.0 {
     //        didSet {
@@ -45,24 +49,27 @@ class FontChangerViewController: UIViewController {
         fontLabel?.text = "Preview Font Size: \(Int(fontSlider.value))"
         fontSlider?.value = Float(validFontSize)
         fontStepper?.value = Double(validFontSize)
+        // STEP 3
+        delegate?.didChangeFont(self)
     }
     
     func configureSlider() {
         fontSlider.minimumValue = 1.0
         fontSlider.maximumValue = 40.0
-        
+      // delegate?.didChangeFont(self)
     }
     
     func configureStepper() {
         fontStepper.minimumValue = 1.0
         fontStepper.maximumValue = 40.0
         fontStepper.stepValue = 1.0
+       // delegate?.didChangeFont(self)
     }
     
     @IBAction func fontChangeSlider(_ sender: UISlider) {
         fontStepper.value = Double(sender.value)
         sliderFont = CGFloat(sender.value)
-        
+       // delegate?.didChangeFont(self)
         
     }
     
@@ -73,6 +80,7 @@ class FontChangerViewController: UIViewController {
     
     
     @IBAction func returnButton(_ sender: UIButton) {
+        
     }
     
 }
