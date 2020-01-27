@@ -8,10 +8,7 @@
 
 import UIKit
 
-//STEP 1
-protocol FontDelegate : AnyObject {
-    func didChangeFont(_ fontChanger: FontChangerViewController)
-}
+
 
 class ViewController: UIViewController {
     
@@ -32,8 +29,6 @@ class ViewController: UIViewController {
         }
     }
     
-    //STEP 4
-    //weak var delegateFont: FontDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,11 +43,12 @@ class ViewController: UIViewController {
         fontSize = 17.0
     }
     
+    // Step 4 and 5 of Custom Delegation is here because we have an instance of (second) FontChangerViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let fontChangerVC = segue.destination as? FontChangerViewController else {
             fatalError()
         }
-        //CUSTOM DELEGATION
+        // Step 4: CUSTOM DELEGATION
         fontChangerVC.delegate = self
         
         fontChangerVC.sliderFont = fontSize
@@ -77,9 +73,7 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //STEP 3
-        //delegate?.didChangeFont(self)
-//        let fontVC = storyboard?.instantiateViewController(identifier: "FontChangerViewController") as! FontChangerViewController
+       
         let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: indexPath)
         let movie = movies[indexPath.row]
 //        fontVC.delegate = self
@@ -93,11 +87,14 @@ extension ViewController: UITableViewDataSource {
 }
 // step 5-6
 extension ViewController: FontDelegate {
-    func didChangeFont(_ fontChanger: FontChangerViewController) {
+    func didChangeFont(_ fontChanger: FontChangerViewController, fontSize: CGFloat) {
+        
+  
 //         let fontVC = storyboard?.instantiateViewController(identifier: "FontChangerViewController") as! FontChangerViewController
 //        fontVC.delegate = self
         //fontSize = fontVC.sliderFont
-        fontSize = fontChanger.sliderFont
+        self.fontSize = fontSize
+        // do not need all that is commented out because we don't need an instance of VC as we already have it in the function
     }
 }
 

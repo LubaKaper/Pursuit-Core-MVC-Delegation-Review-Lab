@@ -8,6 +8,11 @@
 
 import UIKit
 
+//STEP 1
+protocol FontDelegate : AnyObject {
+    // also
+    func didChangeFont(_ fontChanger: FontChangerViewController, fontSize: CGFloat)
+}
 
 class FontChangerViewController: UIViewController {
     
@@ -26,6 +31,8 @@ class FontChangerViewController: UIViewController {
     var sliderFont: CGFloat? {
         didSet {
        updateUI()
+            // STEP 3 of custom Delegation
+            delegate?.didChangeFont(self, fontSize: sliderFont!)
         }
     }
     
@@ -46,7 +53,7 @@ class FontChangerViewController: UIViewController {
         fontSlider?.value = Float(validFontSize)
         fontStepper?.value = Double(validFontSize)
         // STEP 3
-        delegate?.didChangeFont(self)
+        //delegate?.didChangeFont(self)
     }
     
     func configureSlider() {
@@ -65,7 +72,6 @@ class FontChangerViewController: UIViewController {
     @IBAction func fontChangeSlider(_ sender: UISlider) {
         fontStepper.value = Double(sender.value)
         sliderFont = CGFloat(sender.value)
-       
         
     }
     
