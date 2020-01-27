@@ -16,7 +16,7 @@ protocol FontDelegate : AnyObject {
 class ViewController: UIViewController {
     
     // STEP 2
-    weak var delegate: FontDelegate?
+   // weak var delegate: FontDelegate?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
     }
     
     //STEP 4
-    weak var delegateFont: FontDelegate?
+    //weak var delegateFont: FontDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +52,9 @@ class ViewController: UIViewController {
         guard let fontChangerVC = segue.destination as? FontChangerViewController else {
             fatalError()
         }
-        //let font = fontSize
+        //CUSTOM DELEGATION
+        fontChangerVC.delegate = self
+        
         fontChangerVC.sliderFont = fontSize
     }
     
@@ -92,21 +94,10 @@ extension ViewController: UITableViewDataSource {
 // step 5-6
 extension ViewController: FontDelegate {
     func didChangeFont(_ fontChanger: FontChangerViewController) {
-         let fontVC = storyboard?.instantiateViewController(identifier: "FontChangerViewController") as! FontChangerViewController
-        fontVC.delegate = self
-        fontSize = fontVC.sliderFont
+//         let fontVC = storyboard?.instantiateViewController(identifier: "FontChangerViewController") as! FontChangerViewController
+//        fontVC.delegate = self
+        //fontSize = fontVC.sliderFont
+        fontSize = fontChanger.sliderFont
     }
 }
 
-//override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        guard let FontChangerSegue = segue.destination else {
-//            return
-//        }
-//        FontChangerSegue.delegate = self
-//    }
-//
-//extension ViewController: FontChangerDelegate {
-//    func someDelegateFunction(_ fontChanger: FontChangerViewController){
-//        self.fontSizeVar = fontChanger.fontSizeVar
-//    }
-//}

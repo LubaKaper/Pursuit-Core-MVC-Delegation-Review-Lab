@@ -21,11 +21,7 @@ class FontChangerViewController: UIViewController {
    // STEP 2
      weak var delegate: FontDelegate?
     
-    //    var stepperFont: Double = 17.0 {
-    //        didSet {
-    //            fontLabel.text = "Preview Font Size: \(Int(fontStepper.value))"
-    //        }
-    // }
+   
     
     var sliderFont: CGFloat? {
         didSet {
@@ -56,20 +52,20 @@ class FontChangerViewController: UIViewController {
     func configureSlider() {
         fontSlider.minimumValue = 1.0
         fontSlider.maximumValue = 40.0
-      // delegate?.didChangeFont(self)
+      
     }
     
     func configureStepper() {
         fontStepper.minimumValue = 1.0
         fontStepper.maximumValue = 40.0
         fontStepper.stepValue = 1.0
-       // delegate?.didChangeFont(self)
+       
     }
     
     @IBAction func fontChangeSlider(_ sender: UISlider) {
         fontStepper.value = Double(sender.value)
         sliderFont = CGFloat(sender.value)
-       // delegate?.didChangeFont(self)
+       
         
     }
     
